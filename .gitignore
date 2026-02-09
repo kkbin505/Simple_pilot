@@ -1,6 +1,29 @@
 
+# Video files
 *.mp4
+*.mov
+*.avi
+*.mkv
 
-/demo
+# YOLO Models & Exports
+*.pt
+yolov8n_openvino_model/
 
-/simple-pilot-env
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Project specific
+openh264*.dll
+demo/
+simple-pilot-env/
+output_*.mp4
