@@ -13,10 +13,17 @@ This project provides a complete solution for real-time lane detection, vehicle 
 - **Auto-Timestamping**: Saves files as `output_YYYYMMDD_HHMMSS.mp4` to prevent overwrites.
 
 ### 2. Intelligent Lane Tracking (simple_pilot.py)
+- **Hybrid Mode (Camera/File)**: Supports both live C920 camera input and video file inference.
+- **Live C920 Integration**:
+    -   **Threaded Capture**: Ensures high FPS recording and inference.
+    -   **Focus Locking**: Automatically locks focus to infinity (0) for clear road view.
+    -   **180° Flip**: Handles camera mounting orientation.
+    -   **Recording**: Saves live feed to `output_YYYYMMDD_HHMMSS.mp4`.
 - **Lane Smoothing**: Implements a `LaneTracker` with history buffer to eliminate detection jitter.
 - **Polynomial Fitting**: Draws smooth, continuous lane markers instead of jagged lines.
 - **Robust Detection**: Combines HLS color filtering (Yellow/White) with Canny edge detection for maximum reliability.
 - **Intel OpenVINO Acceleration**: Utilizes Intel iGPU for accelerating YOLOv8 detection, achieving 20+ FPS on standard laptops.
+- **Screenshot Feature**: Press **'s'** to save the current frame with inference overlays as a high-quality JPG.
 
 ## 🛠️ Installation
 
@@ -32,20 +39,22 @@ python -c "from ultralytics import YOLO; YOLO('yolov8n.pt').export(format='openv
 
 ## 📖 Usage
 
-### Recording & Basic Lane Detection
+### Live Camera Mode (Default)
+Run `simple_pilot.py` without arguments to use the C920 camera:
 ```bash
-# Auto-detect FPS and start recording
-python c920_lane_detect.py
-
-# Specify camera index manually
-python c920_lane_detect.py --camera 1
-```
-
-### Advanced ADAS (Lane + Vehicle Detection on Video)
-```bash
-# Run advanced pilot on recorded video
 python simple_pilot.py
 ```
+-   **Features**: Recording, Focus Lock, 180° Flip, Real-time Inference.
+-   **Controls**:
+    -   **'s'**: Save screenshot.
+    -   **'q'**: Quit.
+
+### Video File Mode
+Run `simple_pilot.py` with a filename to process a video:
+```bash
+python simple_pilot.py input_video.mp4
+```
+-   **Features**: Inference on pre-recorded video (No recording/flip/focus lock).
 
 ## 🔧 Technical Details
 - **Resolution**: 1280x720 (720p)

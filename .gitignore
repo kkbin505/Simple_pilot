@@ -27,3 +27,6 @@ openh264*.dll
 demo/
 simple-pilot-env/
 output_*.mp4
+
+*.jpg
+*.jpeg
