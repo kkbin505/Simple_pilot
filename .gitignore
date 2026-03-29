@@ -4,3 +4,7 @@
 /demo
 
 /simple-pilot-env
+
+lane_detection/
+
+yolov8n_openvino_model/
