@@ -30,3 +30,5 @@ output_*.mp4
 
 *.jpg
 *.jpeg
+
+lane_detection/

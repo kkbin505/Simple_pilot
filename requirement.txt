@@ -1,4 +1,14 @@
-opencv-python 
-numpy
-torch 
-ultralytics
+# Core Dependencies
+opencv-python>=4.8.0
+numpy>=1.24.0
+torch>=2.0.0
+ultralytics>=8.0.0
+
+# OpenVINO Optimization (Required for GPU acceleration)
+openvino-dev>=2023.0.0
+
+# Benchmarking and Monitoring
+psutil>=5.9.0
+
+# Optional: For better video codec support
+# opencv-contrib-python>=4.8.0
