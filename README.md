@@ -9,6 +9,8 @@ Simple Pilot is a lightweight Advanced Driver Assistance System (ADAS) demo that
 ### 1. Robust Lane Detection with LPF
 - **Temporal Smoothing (Low Pass Filter)**: Uses an exponential moving average on lane line coefficients to eliminate flickering and provide stable visualization.
 - **Optimized & Dynamic ROI**: Features an adjustable trapezoidal mask with configurable offsets and extension parameters, ensuring precise road focus and minimal background noise.
+![mask_roi](img/mask_roi.jpg)
+
 - **Temporal Smoothing (LPF)**: Uses an exponential moving average on lane line coefficients to eliminate flickering and provide stable visualization.
 - **Canny + Hough Pipeline**: Efficient classical CV pipeline for lane extraction without heavy GPU requirements.
 
