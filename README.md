@@ -1,28 +1,30 @@
 # Simple Pilot: Vision-Based Driving Assistant
 
-Simple Pilot is a lightweight Advanced Driver Assistance System (ADAS) demo that provides real-time Lane Departure Warning (LDW) and Forward Collision Warning (FCW) using computer vision and deep learning.
+Simple Pilot is a lightweight, high-performance Advanced Driver Assistance System (ADAS) that provides real-time Lane Departure Warning (LDW) and Forward Collision Warning (FCW) using a hybrid approach of classical computer vision and deep learning.
 
 ---
 
-## 🚀 Recent Updates & Features
+## 🚀 Key Improvements & Features
 
-### 1. Robust Lane Detection with LPF
-- **Temporal Smoothing (Low Pass Filter)**: Uses an exponential moving average on lane line coefficients to eliminate flickering and provide stable visualization.
-- **Optimized & Dynamic ROI**: Features an adjustable trapezoidal mask with configurable offsets and extension parameters, ensuring precise road focus and minimal background noise.
-![mask_roi](img/mask_roi.jpg)
+### 1. Advanced Lane Detection Pipeline
+- **Sharpness-First Detection**: Performs edge detection on original pixels for maximum precision before any geometric warping.
+- **CLAHE Contrast Enhancement**: Uses Contrast Limited Adaptive Histogram Equalization to restore visibility of faint lane markers in shadows or overexposed conditions.
+- **HSV Dual-Color Masking**: Robust detection of both **White** and **Yellow** lanes using multi-channel color segmentation.
+- **Triple-Guard Filtering**:
+    - **Top 35% Exclusion**: Ignores sky, horizon, and trees to prevent false positives.
+    - **Bottom 10% Exclusion**: Clips the car hood and dashboard reflections.
+    - **0.5 Slope Filter**: Aggressively discards horizontal road textures and artifacts.
 
-- **Temporal Smoothing (LPF)**: Uses an exponential moving average on lane line coefficients to eliminate flickering and provide stable visualization.
-- **Canny + Hough Pipeline**: Efficient classical CV pipeline for lane extraction without heavy GPU requirements.
+### 2. Temporal Stability & LPF
+- **Low Pass Filter (LPF)**: Implements an exponential moving average on lane coefficients to eliminate flickering, ensuring a steady visual experience even on bumpy roads.
 
-### 2. Deep Learning Vehicle Detection (YOLOv8)
-- **Object Recognition**: Identifies cars, trucks, buses, and motorcycles in real-time.
-- **FCW Logic**: Simple but effective collision warning based on bounding box size and lane position.
-- **Hardware Acceleration**: Automatic CUDA detection for NVIDIA GPUs.
+### 3. Lens Calibration (Optional)
+- **Fisheye Correction**: Support for OpenCV/Gyroflow lens profile JSON files to rectify wide-angle distortion for geometric accuracy.
+- **Correction-After-Detection**: Hybrid workflow that detects on sharp "bent" pixels but calculates warnings on "straightened" coordinates.
 
-### 3. Smart Command Line Interface
-- **Flexible Source Input**: Supports both local video files and live camera streams (via index).
-- **Time Seeking**: Jump to any specific second in a video using the `-s` flag.
-- **Error Handling**: Built-in fixes for common OpenMP (`OMP Error #15`) and environment initialization issues.
+### 4. Deep Learning Vehicle Detection (YOLOv8)
+- **Object Recognition**: Identifies cars, trucks, and buses in real-time.
+- **FCW Logic**: Collision warning based on object proximity and relative position within the lane.
 
 ---
 
@@ -38,17 +40,17 @@ pip install opencv-python numpy torch ultralytics
 ## 📖 Usage
 
 ### Running the Script
-Provide a video path or a camera index (default is `0` for webcam):
+Run on a video file or a live camera stream:
 
 ```bash
-# Run on a video file
+# Basic run on a video file
 python simple_pilot.py path/to/driving_video.mp4
 
-# Run on a video starting from the 100th second
+# Advanced: Start from 100 seconds into the video
 python simple_pilot.py "D:\video.mp4" -s 100
 
-# Run on a specific connected camera (index 1)
-python simple_pilot.py 1
+# Run on live webcam (index 0)
+python simple_pilot.py 0
 ```
 
 ### Controls
@@ -58,22 +60,14 @@ python simple_pilot.py 1
 
 ---
 
-## 🔧 Configuration (Calibration)
-
-Open `simple_pilot.py` to adjust these variables for better performance:
-- `LPF_ALPHA`: Adjust smoothing (lower = smoother, higher = faster).
-- `width_ratio` / `left_offset`: Calibrate the lane detection trapezoid.
-- `minLineLength`: Threshold for Hough line detection.
-
----
-
 ## 📁 Project Structure
 
 ```text
 Simple_pilot/
-├── simple_pilot.py      # Main script (Lane Detect + FCW + LDW + LPF Filter)
+├── simple_pilot.py      # Core ADAS Logic (Lane Detection + FCW + LDW)
 ├── yolov8n.pt           # YOLOv8 pre-trained weights
-└── README.md            # Updated documentation
+├── lens/                # (Optional) Lens calibration JSON files
+└── README.md            # Project documentation
 ```
 
 ---
