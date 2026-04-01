@@ -15,14 +15,15 @@ Simple Pilot is a lightweight, high-performance Advanced Driver Assistance Syste
     - **Bottom 10% Exclusion**: Clips the car hood and dashboard reflections.
     - **0.5 Slope Filter**: Aggressively discards horizontal road textures and artifacts.
 
-### 2. Temporal Stability & LPF
-- **Low Pass Filter (LPF)**: Implements an exponential moving average on lane coefficients to eliminate flickering, ensuring a steady visual experience even on bumpy roads.
+### 2. Temporal Stability & Tracking
+- **LaneTracker Engine**: Replaced basic LPF with a **deque-based historical smoothing (SMA)**.
+- **Outlier Rejection**: A sliding window of 10 frames eliminates artifacts and keeps the lane stable during bumpy conditions or momentary dropouts.
 
 ### 3. Lens Calibration (Optional)
 - **Fisheye Correction**: Support for OpenCV/Gyroflow lens profile JSON files to rectify wide-angle distortion for geometric accuracy.
 - **Correction-After-Detection**: Hybrid workflow that detects on sharp "bent" pixels but calculates warnings on "straightened" coordinates.
 
-### 4. Deep Learning Vehicle Detection (YOLOv8)
+### 5. Deep Learning Vehicle Detection (YOLOv8)
 - **Object Recognition**: Identifies cars, trucks, and buses in real-time.
 - **FCW Logic**: Collision warning based on object proximity and relative position within the lane.
 
