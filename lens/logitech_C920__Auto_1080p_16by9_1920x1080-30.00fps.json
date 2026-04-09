@@ -1,0 +1,70 @@
+{
+  "name": "Logitech_C920__Auto_1080p_16by9_1920x1080-30.01fps",
+  "note": "",
+  "calibrated_by": "kkbin",
+  "camera_brand": "Logitech",
+  "camera_model": "C920",
+  "lens_model": "",
+  "camera_setting": "Auto",
+  "calib_dimension": {
+    "w": 1920,
+    "h": 1080
+  },
+  "orig_dimension": {
+    "w": 1920,
+    "h": 1080
+  },
+  "output_dimension": {
+    "w": 1920,
+    "h": 1080
+  },
+  "frame_readout_time": null,
+  "frame_readout_direction": null,
+  "gyro_lpf": null,
+  "input_horizontal_stretch": 1.0,
+  "input_vertical_stretch": 1.0,
+  "num_images": 8,
+  "fps": 30.012751,
+  "crop": null,
+  "official": false,
+  "asymmetrical": false,
+  "fisheye_params": {
+    "RMS_error": 1.5832057985233245,
+    "camera_matrix": [
+      [
+        2368.9241877832574,
+        0.0,
+        1034.1533735034911
+      ],
+      [
+        0.0,
+        2367.4964991323136,
+        522.3596458127022
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "distortion_coeffs": [
+      0.06644709657172727,
+      9.496369941077115,
+      -105.8357125774664,
+      357.90842608487634
+    ],
+    "radial_distortion_limit": null
+  },
+  "identifier": "",
+  "calibrator_version": "1.6.3",
+  "date": "2026-03-31",
+  "compatible_settings": [],
+  "sync_settings": null,
+  "distortion_model": null,
+  "digital_lens": null,
+  "digital_lens_params": null,
+  "interpolations": null,
+  "focal_length": null,
+  "crop_factor": null,
+  "global_shutter": false
+}
